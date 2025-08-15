@@ -1,0 +1,299 @@
+<div class="relative overflow-hidden shadow-lg mb-6 group">
+  <img
+    src="locutores.png"
+    alt="Locutores"
+    class="w-full h-64 md:h-250 object-cover transition-transform duration-500 group-hover:scale-105 bg-black"
+  />
+  <div class="absolute inset-0 bg-black/30 flex items-end p-6">
+    <h2
+      class="text-white text-2xl md:text-4xl font-bold drop-shadow-lg hover:text-green-400"
+    ></h2>
+  </div>
+</div>
+<!-- Banner Publicidad -->
+<div class="px-4">
+  <a
+    href="http://eltrompo.org/boletos"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      class="object-cover mx-auto"
+      src="https://maxiradiofm.com/banners/Trompo-2025.jpeg"
+      alt="Banner Publicidad"
+    />
+  </a>
+</div>
+<!-- Featured Tendencia Section -->
+<main class="px-2 mx-auto max-w-7xl pb-5 pt-2">
+  <h2
+    class="text-xl font-bold mt-6 mb-2 rounded-1xl text-align-center text-black p-2 text-center border-b-2 border-dashed"
+  >
+    Noticias en Tendencia
+  </h2>
+  <div
+    *ngIf="tendencia.length > 0"
+    class="relative rounded-lg overflow-hidden shadow-lg mb-6 group"
+    [routerLink]="['/post', tendencia[0].id, tendencia[0].slug]"
+  >
+    <img
+      [src]="tendencia[0]._embedded['wp:featuredmedia'][0].source_url"
+      [alt]="tendencia[0].title.rendered"
+      class="w-full h-64 md:h-150 transition-transform duration-500 group-hover:scale-105 object-center"
+    />
+    <div class="absolute inset-0 bg-black/50 flex flex-col justify-end p-6">
+      <h2
+        class="text-white text-2xl md:text-4xl font-bold drop-shadow-lg hover:text-green-400"
+        [innerHTML]="tendencia[0].title.rendered"
+      ></h2>
+      <div class="mt-2 text-xs text-white/80 meta-info-dark">
+        <span
+          *ngIf="
+            postCategories[tendencia[0].id] &&
+            postCategories[tendencia[0].id].length > 0
+          "
+          class="category-tag mr-2 bg-white/10 hover:bg-white/20"
+        >
+          {{ postCategories[tendencia[0].id][0].name }}
+        </span>
+        <span class="date-info">
+          Publicado: {{ tendencia[0].date | date : "dd/MM/yyyy" }}</span
+        >
+      </div>
+    </div>
+  </div>
+</main>
+<main class="px-2 mx-auto max-w-7xl pb-5 pt-8">
+  <h2
+    class="text-2xl font-bold mt-6 mb-8 rounded-1xl text-align-center text-black p-2 text-center border-b-2 border-dashed"
+  >
+    Próximas Presentaciones Palenque Tijuana 2025
+  </h2>
+  <!--Banner de publicidad Feria Tijuana 2025-->
+  <div class="carousel">
+    <span class="carousel-arrow prev-arrow" (click)="showPrevCard()">&lt;</span>
+    <div
+      class="card"
+      *ngFor="let banner of banners; let i = index"
+      [style.transform]="getTransform(i)"
+      [style.zIndex]="getZIndex(i)"
+    >
+      <a
+        href="https://ferianacionaldetijuana.com/lineup/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img [src]="banner.img" alt="banner"
+      /></a>
+    </div>
+    <span class="carousel-arrow next-arrow" (click)="showNextCard()">&gt;</span>
+  </div>
+</main>
+<main class="px-2 mx-auto max-w-7xl pb-5 pt-8">
+  <!-- Baja California-->
+  <h2
+    class="text-2xl font-bold mt-6 mb-2 rounded-1xl text-align-center text-black p-2 text-center border-b-2 border-dashed"
+  >
+    Noticias Baja California
+  </h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <a
+      [routerLink]="['/post', post.id, post.slug]"
+      *ngFor="let post of posts"
+      class="bg-white rounded-lg shadow-md p-4 block hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
+    >
+      <div
+        class="mb-4 overflow-hidden rounded-lg flex-grow-0"
+        *ngIf="post._embedded && post._embedded['wp:featuredmedia']"
+      >
+        <img
+          [src]="post._embedded['wp:featuredmedia'][0].source_url"
+          [alt]="post.title.rendered"
+          class="w-full h-90 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+      <h3
+        class="text-lg font-semibold text-gray-900 hover:text-green-600 mt-auto"
+        [innerHTML]="post.title.rendered"
+      ></h3>
+      <div class="mt-2 text-xs text-gray-500">
+        <span
+          *ngIf="postCategories[post.id] && postCategories[post.id].length > 0"
+          class="category-tag mr-2"
+        >
+          {{ postCategories[post.id][0].name }}
+        </span>
+        <span class="date-info">
+          Publicado: {{ post.date | date : "dd/MM/yyyy" }}</span
+        >
+      </div>
+    </a>
+  </div>
+</main>
+<!-- Banner Publicidad -->
+<div class="px-4">
+  <a href=""
+    ><img
+      class="object-cover mx-auto mb-4"
+      src="https://wp.maxiradiofm.com/wp-content/uploads/2020/10/sinfornteras.jpg"
+      alt="Banner Publicidad"
+  /></a>
+</div>
+<!-- Noticias de cultura  -->
+<div
+  class="bg-gradient-to-l from-gray-600 via-gray-700 p-2 max-w-60xl mx-auto shadow-md mb-4"
+>
+  <main class="px-2 mx-auto max-w-7xl">
+    <h2
+      class="text-2xl font-bold mt-6 mb-2 rounded-1xl text-align-center text-white p-2 text-center border-b-2 border-dashed"
+    >
+      Noticias De Cultura
+    </h2>
+  </main>
+  <main class="px-2 mx-auto max-w-7xl pb-5 pt-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a
+        [routerLink]="['/post', post.id, post.slug]"
+        *ngFor="let post of post"
+        class="bg-white rounded-lg shadow-md p-4 block hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
+      >
+        <div
+          class="mb-4 overflow-hidden rounded-lg flex-grow-0"
+          *ngIf="post._embedded && post._embedded['wp:featuredmedia']"
+        >
+          <img
+            [src]="post._embedded['wp:featuredmedia'][0].source_url"
+            [alt]="post.title.rendered"
+            class="w-full h-90 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <h3
+          class="text-lg font-semibold text-gray-900 hover:text-green-600 mt-auto"
+          [innerHTML]="post.title.rendered"
+        ></h3>
+        <div class="mt-2 text-xs text-gray-500">
+          <span
+            *ngIf="
+              postCategories[post.id] && postCategories[post.id].length > 0
+            "
+            class="category-tag mr-2"
+          >
+            {{ postCategories[post.id][0].name }}
+          </span>
+          <span class="date-info">
+            Publicado: {{ post.date | date : "dd/MM/yyyy" }}</span
+          >
+        </div>
+      </a>
+    </div>
+  </main>
+</div>
+<main class="px-2 mx-auto max-w-7xl pb-5 pt-8">
+  <h2
+    class="text-2xl font-bold mt-6 mb-8 rounded-1xl text-align-center text-black p-2 text-center border-b-2 border-dashed"
+  >
+    Eventos Teatro del pueblo Tijuana 2025
+  </h2>
+  <!--Banner de publicidad Feria Tijuana 2025-->
+  <div class="carousel">
+    <span class="carousel-arrow prev-arrow" (click)="showPrevCard()">&lt;</span>
+    <div
+      class="card"
+      *ngFor="let bannerTeatro of bannersTeatro; let i = index"
+      [style.transform]="getTransform(i)"
+      [style.zIndex]="getZIndex(i)"
+    >
+      <a
+        href="https://ferianacionaldetijuana.com/lineup/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img [src]="bannerTeatro.img" alt="banner" />
+      </a>
+    </div>
+    <span class="carousel-arrow next-arrow" (click)="showNextCard()">&gt;</span>
+  </div>
+</main>
+
+<main class="px-2 mx-auto max-w-7xl pb-5 pt-8">
+  <!-- Featured Deportes Section -->
+  <h2
+    class="text-2xl font-bold mt-6 mb-2 rounded-1xl text-align-center text-black p-2 text-center border-b-2 border-dashed"
+  >
+    Noticias Deportes
+  </h2>
+  <div
+    *ngIf="deportes.length > 0"
+    class="relative rounded-lg overflow-hidden shadow-lg mb-6 group"
+    [routerLink]="['/post', deportes[0].id, deportes[0].slug]"
+  >
+    <img
+      [src]="deportes[0]._embedded['wp:featuredmedia'][0].source_url"
+      [alt]="deportes[0].title.rendered"
+      class="w-full h-64 md:h-150 object-cover transition-transform duration-500 group-hover:scale-105 aspect-retro"
+    />
+    <div class="absolute inset-0 bg-black/50 flex flex-col justify-end p-6">
+      <h2
+        class="text-white text-2xl md:text-4xl font-bold drop-shadow-lg hover:text-green-400"
+        [innerHTML]="deportes[0].title.rendered"
+      ></h2>
+      <div class="mt-2 text-xs text-white/80 meta-info-dark">
+        <span
+          *ngIf="
+            postCategories[deportes[0].id] &&
+            postCategories[deportes[0].id].length > 0
+          "
+          class="category-tag mr-2 bg-white/10 hover:bg-white/20"
+        >
+          {{ postCategories[deportes[0].id][0].name }}
+        </span>
+        <span class="date-info">
+          Publicado: {{ deportes[0].date | date : "dd/MM/yyyy" }}</span
+        >
+      </div>
+    </div>
+  </div>
+  <!-- Noticias de deportes  -->
+  <div class="bg-white shadow-md rounded-lg mb-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a
+        [routerLink]="['/post', deportes.id, deportes.slug]"
+        *ngFor="let deportes of deportes.slice(1)"
+        class="bg-white rounded-lg shadow-md p-4 block hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
+      >
+        <div
+          class="mb-4 overflow-hidden rounded-lg flex-grow-0"
+          *ngIf="deportes._embedded && deportes._embedded['wp:featuredmedia']"
+        >
+          <img
+            [src]="deportes._embedded['wp:featuredmedia'][0].source_url"
+            [alt]="deportes.title.rendered"
+            class="w-full h-90 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <h3
+          class="text-lg font-semibold text-gray-900 hover:text-green-600 mt-auto"
+          [innerHTML]="deportes.title.rendered"
+        ></h3>
+        <div class="mt-2 text-xs text-gray-500">
+          <span
+            *ngIf="
+              postCategories[deportes.id] &&
+              postCategories[deportes.id].length > 0
+            "
+            class="category-tag mr-2"
+          >
+            {{ postCategories[deportes.id][0].name }}
+          </span>
+          <span class="date-info">
+            Publicado: {{ deportes.date | date : "dd/MM/yyyy" }}</span
+          >
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+<!--Section of sponsors--->
+<div class="bg-gray-50 py-24 sm:py-2 w-full">
+  <app-carousel [items]="patrocinadores"></app-carousel>
+</div>

@@ -1,0 +1,90 @@
+<!-- Banner Publicidad -->
+<div class="px-4">
+  <a
+    href="http://eltrompo.org/boletos"
+    target="_blank"
+    rel="noopener noreferrer"
+    ><img
+      class="object-cover mx-auto mb-2 pt-2"
+      src="https://maxiradiofm.com/banners/Trompo-2025.jpeg"
+      alt="Banner Publicidad"
+  /></a>
+</div>
+<!-- Detalle de la Publicación -->
+<div *ngIf="post" class="p-4 max-w-5xl mx-auto">
+  <h1 class="text-3xl font-bold mb-4" [innerHTML]="post.title.rendered"></h1>
+  <div class="text-gray-600 text-sm mb-4">
+    Publicado:
+    {{ post.date | date : "dd/MM/yyyy" }}
+    <div
+      class="mb-4 mt-4"
+      *ngIf="post._embedded && post._embedded['wp:featuredmedia']"
+    >
+      <img
+        [src]="post._embedded['wp:featuredmedia'][0].source_url"
+        [alt]="post.title.rendered"
+        class="w-full h-auto rounded-lg shadow-md mb-4 aspect-3/2"
+      />
+    </div>
+    <div
+      class="prose max-w-none tracking-wider leading-10 text-justify text-base space-x-0 space-y-5"
+      [innerHTML]="post.content.rendered"
+    ></div>
+
+    <!-- Botones para compartir -->
+    <div class="mt-8 flex flex-wrap gap-3">
+      <h3 class="text-lg font-semibold mr-2">Compartir:</h3>
+      <button
+        (click)="shareOnFacebook()"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center share-button"
+      >
+        <a class="hover:text-grey">
+          <i class="fab fa-facebook fa-lg"></i>
+        </a>
+      </button>
+      <button
+        (click)="shareOnTwitter()"
+        class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition duration-300 flex items-center share-button"
+      >
+        <a class="hover:text-grey">
+          <i class="fab fa-twitter fa-lg"></i>
+        </a>
+      </button>
+      <button
+        (click)="shareOnWhatsApp()"
+        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 flex items-center share-button"
+      >
+        <a class="hover:text-grey">
+          <i class="fab fa-whatsapp fa-lg"></i>
+        </a>
+      </button>
+    </div>
+
+    <!-- Etiquetas y Categorías
+  <div class="mt-8">
+    <div *ngIf="categories.length > 0" class="mb-4">
+      <h3 class="text-lg font-semibold mb-2">Categorías:</h3>
+      <div class="flex flex-wrap gap-2">
+        <span
+          *ngFor="let category of categories"
+          class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium category-item"
+        >
+          {{ category.name }}
+        </span>
+      </div>
+    </div>
+-->
+    <!-- Etiquetas -->
+    <div *ngIf="tags.length > 0">
+      <h3 class="text-lg font-semibold mb-2">Etiquetas:</h3>
+      <div class="flex flex-wrap gap-2">
+        <span
+          *ngFor="let tag of tags"
+          class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium tag-item"
+        >
+          {{ tag.name }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

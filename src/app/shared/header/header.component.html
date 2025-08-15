@@ -1,0 +1,80 @@
+<header class="bg-black text-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+    <a
+      routerLink="/"
+      class="text-xl font-bold tracking-wide hover:text-yellow-400"
+    >
+      <img src="Logo.png" alt="Logo" class="h-17 w-auto" />
+    </a>
+    <!-- Banner Publicidad
+    <a href=""
+      ><img
+        class="object-cover mx-auto h-18 mb-4 pt-2"
+        src="https://maxiradiofm.com/wp-content/uploads/2020/10/sinfornteras.jpg"
+        alt="Banner Publicidad"
+    /></a>
+    -->
+    <!-- Menu de navegación -->
+    <nav class="hidden md:flex gap-6 text-lg font-medium">
+      <a
+        routerLink="/"
+        routerLinkActive="text-yellow-400"
+        class="hover:text-yellow-400"
+        >Inicio</a
+      >
+      <a
+        routerLink="/quienes-somos"
+        routerLinkActive="text-yellow-400"
+        class="hover:text-yellow-400"
+        >Quiénes somos</a
+      >
+      <a
+        routerLink="/contacto"
+        routerLinkActive="text-yellow-400"
+        class="hover:text-yellow-400"
+        >Contacto</a
+      >
+    </nav>
+    <!-- Menu móvil -->
+    <div class="md:hidden">
+      <button (click)="toggleMenu()" class="focus:outline-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div
+    *ngIf="menuOpen"
+    class="md:hidden bg-black p-4 space-y-2 text-center top-0"
+  >
+    <a routerLink="/" (click)="toggleMenu()" class="block hover:text-yellow-400"
+      >Inicio</a
+    >
+    <a
+      routerLink="/quienes-somos"
+      (click)="toggleMenu()"
+      class="block hover:text-yellow-400"
+      >Quiénes somos</a
+    >
+    <a
+      routerLink="/contacto"
+      (click)="toggleMenu()"
+      class="block hover:text-yellow-400"
+      >Contacto</a
+    >
+  </div>
+</header>

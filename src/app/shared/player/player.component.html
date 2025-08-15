@@ -1,0 +1,86 @@
+<div
+  class="flex items-center gap-4 bg-gray-800 text-white p-4 rounded-lg shadow-lg max-w-2xl mx-auto"
+>
+  <!-- Álbum Cover -->
+  <img
+    [src]="songArt"
+    alt="cover"
+    class="w-16 h-16 rounded-lg object-cover"
+    (error)="songArt = 'assets/default-cover.png'"
+  />
+
+  <!-- Info Canción -->
+  <div class="flex-1 min-w-0">
+    <p class="font-bold truncate" [title]="songTitle">{{ songTitle }}</p>
+    <p class="text-sm text-gray-300 truncate" [title]="songArtist">
+      {{ songArtist }}
+    </p>
+  </div>
+
+  <!-- Controles -->
+  <div class="flex items-center gap-3">
+    <!-- Botón Play/Pause -->
+    <button
+      (click)="togglePlay()"
+      class="p-2 rounded-full bg-green-600 hover:bg-green-500 transition-colors"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          *ngIf="!isPlaying"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+        />
+        <path
+          *ngIf="isPlaying"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    </button>
+
+    <!-- Control Volumen -->
+    <div class="flex items-center gap-2 w-24">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 text-gray-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15.536 8.464a5 5 0 010 7.072M12 6a7.975 7.975 0 015.657 2.343m0 0a7.975 7.975 0 010 11.314m-11.314 0a7.975 7.975 0 010-11.314m0 0a7.975 7.975 0 015.657-2.343"
+        />
+      </svg>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="1.0"
+        [(ngModel)]="volume"
+        (input)="setVolume($event)"
+        class="w-full accent-green-500"
+      />
+    </div>
+  </div>
+
+  <!-- Audio (oculto) -->
+  <audio
+    #audioPlayer
+    [src]="streamUrl"
+    (play)="isPlaying = true"
+    (pause)="isPlaying = false"
+  ></audio>
+</div>

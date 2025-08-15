@@ -1,0 +1,12 @@
+<div class="w-full overflow-hidden">
+  <div class="flex animate-slide gap-6" [style.animationDuration]="'15s'">
+    <ng-container *ngFor="let i of [0, 1]">
+      <div
+        *ngFor="let item of items"
+        class="flex-shrink-0 w-65 h-65 flex justify-center items-center py-6"
+      >
+        <img [src]="item.src" [alt]="item.alt" class="max-h-full max-w-full" />
+      </div>
+    </ng-container>
+  </div>
+</div>
